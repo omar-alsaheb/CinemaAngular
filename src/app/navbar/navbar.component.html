@@ -19,9 +19,13 @@
             Account
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" routerLink="login">Login</a>
-            <a class="dropdown-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" routerLink="register">Register</a>
-            <a class="dropdown-item" routerLink="logout">Logout</a>
+         <div *ngIf="!isLogedIn()">
+          <a class="dropdown-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" routerLink="login">Login</a>
+          <a class="dropdown-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" routerLink="register">Register</a>
+         </div>
+           <div *ngIf="isLogedIn()">
+            <a class="dropdown-item" (click)="Logout()">Logout</a>
+           </div>
           </div>
         </li>
       </ul>

@@ -1,23 +1,38 @@
-<form class="form-signin">
+<form class="form-signin"  [formGroup]="logninForm" (ngSubmit)="onSubmit()">
+
     <div class="text-center mb-4">
       <img class="mb-4" src="https://getbootstrap.com/docs/4.1/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
       <h1 class="h3 mb-3 font-weight-normal">Login</h1>
     </div>
-
+    <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="loginConfirmd">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only">Close</span>
+      </button>
+      <strong>You have been successfully Login :)</strong>
+    </div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="loginFials">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only">Close</span>
+      </button>
+      <strong>Your Email or Password incorrect :(</strong>
+    </div>
     <div class="form-label-group">
-      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" formControlName="email">
       <label for="inputEmail">Email address</label>
     </div>
 
     <div class="form-label-group">
-      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+      <input type="password" id="inputPassword" class="form-control" placeholder="Password"  formControlName="password">
       <label for="inputPassword">Password</label>
     </div>
 
     <div class="checkbox mb-3">
       <label>
-        <input type="checkbox" value="remember-me"> Remember me
+        <input type="checkbox" value="remember-me" formControlName="remember"> Remember me
       </label>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="logninForm.invalid">Sign in</button>
   </form>
+

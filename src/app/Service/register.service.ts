@@ -3,6 +3,7 @@ import { RegisterModel } from '../Models/registerModel';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Users } from '../Models/users';
+import { LoginModel } from '../Models/loginModel';
 
 @Injectable({
   providedIn: 'root',
@@ -18,12 +19,26 @@ export class RegisterService {
   };
 
   register(reg: RegisterModel): Observable<RegisterModel> {
-    return this.http.post<RegisterModel>(this.baseUrl + 'Register', reg,this.headers).pipe();
+    return this.http
+      .post<RegisterModel>(this.baseUrl + 'Register', reg, this.headers)
+      .pipe();
   }
 
-  getAllUsers():Observable<Users[]>{
-    return this.http.get<Users[]>(this.baseUrl+'GetAllUsers').pipe();
+  getAllUsers(): Observable<Users[]> {
+    return this.http.get<Users[]>(this.baseUrl + 'GetAllUsers').pipe();
+  }
 
+  loginService(login: LoginModel): Observable<LoginModel> {
+    return this.http.post<LoginModel>(this.baseUrl + 'Login', login,this.headers).pipe();
+  }
 
+  Logout() {
+    return this.http.get<LoginModel>(this.baseUrl + 'Logout').pipe();
+  }
+
+  getRoleName(email: string) {
+    return this.http
+      .get(this.baseUrl + 'GetRoleName/' + email,{responseType:'text'})
+      .pipe();
   }
 }

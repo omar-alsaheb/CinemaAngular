@@ -101,7 +101,7 @@ export class RegisterComponent implements OnInit {
     this.registerService.getAllUsers().subscribe(
       (res) => {
         this.users = res;
-        console.log(this.users);
+        // console.log(this.users);
       },
       (error) => {
         console.log(error);
