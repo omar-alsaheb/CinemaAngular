@@ -1,21 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AddUserModel } from 'src/app/Models/addUserModel';
 import { RegisterModel } from 'src/app/Models/registerModel';
 import { Users } from 'src/app/Models/users';
+import { AdminService } from 'src/app/Service/admin.service';
 import { RegisterService } from 'src/app/Service/register.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  selector: 'app-add-user',
+  templateUrl: './add-user.component.html',
+  styleUrls: ['./add-user.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class AddUserComponent implements OnInit {
+
   constructor(
     private form: FormBuilder,
-    private registerService: RegisterService
+    private registerService: RegisterService,
+    private adminService:AdminService
   ) { }
 
-  reg: RegisterModel;
+  addUser: AddUserModel;
+  // reg: RegisterModel;
   registerForm: FormGroup;
   errorMsg: string;
   succsMsg: string = '';
@@ -28,10 +33,13 @@ export class RegisterComponent implements OnInit {
     this.isFormBusy = false;
     this.AllUsers();
     this.users = [];
-    this.reg = {
-      userName: '',
-      email: '',
-      password: '',
+    this.addUser = {
+      userName:'',
+      email:'',
+      // emailConfirmed:true,
+      password:'',
+      phoneNumber:'',
+      country:'',
     };
 
     this.registerFormfunc();
@@ -54,6 +62,8 @@ export class RegisterComponent implements OnInit {
   registerFormfunc() {
     this.registerForm = this.form.group({
       userName: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
+      country: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: [
         '',
@@ -80,11 +90,12 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     if (this.registerForm.valid && !this.isUserExistOp && !this.isEmailExistOp) {
       this.validRegsModel();
-      this.registerService.register(this.reg).subscribe(
+      // console.log(this.registerForm.value)
+      this.adminService.AddNewUser(this.addUser).subscribe(
         (res) => {
           this.succsMsg = 'You have successfully registered';
           console.log(this.succsMsg);
-          console.log(res);
+          // console.log(res);
         },
         (error) => {
           console.log(error);
@@ -98,9 +109,11 @@ export class RegisterComponent implements OnInit {
     // console.log(this.registerForm.value)
   }
   validRegsModel() {
-    this.reg.userName = this.registerForm.value.userName;
-    this.reg.email = this.registerForm.value.email;
-    this.reg.password = this.registerForm.value.password;
+    this.addUser.userName = this.registerForm.value.userName;
+    this.addUser.email = this.registerForm.value.email;
+    this.addUser.phoneNumber = this.registerForm.value.phoneNumber;
+    this.addUser.country = this.registerForm.value.country;
+    this.addUser.password = this.registerForm.value.password;
   }
   validateConfirmPassword() {
     if (

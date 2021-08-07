@@ -9,6 +9,8 @@ export class AuthService {
   constructor(private http: HttpClient, private crypto: CryptService) { }
   baseUrl = 'https://localhost:44378/api/Account/';
 
+  roleName:string;
+
   initStorge(rem: boolean, email: string) {
     const day = new Date();
     if (rem) {
@@ -29,14 +31,14 @@ export class AuthService {
     ) {
 
       const email = this.crypto.Decrypt(localStorage.getItem('email'));
-      const roleName = this.crypto.Decrypt(localStorage.getItem('roleName'));
+      this.roleName = this.crypto.Decrypt(localStorage.getItem('roleName'));
       const expir = this.crypto.Decrypt(localStorage.getItem('expir'));
-      if (email != null && roleName != null && expir != null) {
-        console.log(roleName);
+      if (email != null && this.roleName != null && expir != null) {
+        console.log(this.roleName,email);
 
-        this.ValidateUser(email, roleName).subscribe(
+        this.ValidateUser(email, this.roleName).subscribe(
           (r) => {
-            console.log(r);
+            console.log("user auth");
           },
           (er) => {
             console.log(er);
@@ -49,13 +51,19 @@ export class AuthService {
     this.getRoleName(email).subscribe(
       (r) => {
         localStorage.setItem('roleName', this.crypto.Encrypt(r));
-        console.log(r);
+        this.roleName = r;
+        
       },
       (e) => {
         console.log(e);
       }
     );
   }
+
+
+  // to controle expier date for Credentials
+  //https://youtu.be/mCEWA0DgCEE?t=1456
+
 
   getRoleName(email: string) {
     return this.http

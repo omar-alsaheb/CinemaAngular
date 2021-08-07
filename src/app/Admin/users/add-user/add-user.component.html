@@ -1,9 +1,7 @@
 <form class="form-signin" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
   <div class="text-center mb-4">
-    <img class="mb-4"
-      src="https://e7.pngegg.com/pngimages/776/561/png-clipart-computer-icons-internet-domain-name-cinema-logo-television-angle.png"
-      alt="" width="72" height="72" />
-    <h1 class="h3 mb-3 font-weight-normal">Register</h1>
+
+    <h1 class="h3 mb-3 font-weight-normal">Add New User</h1>
   </div>
   <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="succsMsgReg">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -29,7 +27,7 @@
     <div class="text-danger" *ngIf="isEmailExistOp">Email is exist</div>
   </div>
   <div class="form-label-group">
-    <input type="email" id="inputuser" class="form-control" placeholder="User Name" formControlName="userName"
+    <input type="email" id="userName" class="form-control" placeholder="User Name" formControlName="userName"
       [class.is-invalid]="
         this.registerForm.get('userName')?.invalid &&
         registerForm.get('userName')?.touched
@@ -59,11 +57,7 @@
         this.registerForm.get('password')?.touched
       " />
     <label for="inputPassword">Password</label>
-    <!-- <span class="text-danger" *ngIf="
-        registerForm.get('password')?.invalid &&
-        registerForm.get('password')?.touched
-      ">Please enter valid Password
-    </span> -->
+
     <div class="invalid-feedback">Please enter valid Password</div>
     <span class="text-danger" *ngIf="registerForm.get('password')?.errors?.minLength">Please enter 6 Char</span>
     <div class="valid-feedback">Looks good!</div>
@@ -79,11 +73,7 @@
         this.registerForm.get('ConfirmPassword')?.touched
       " />
     <label for="ConfirmPassword">Confirm Password</label>
-    <!-- <span class="text-danger" *ngIf="
-        registerForm.get('password')?.invalid &&
-        registerForm.get('password')?.touched
-      ">Please enter valid Password
-    </span> -->
+
     <div class="invalid-feedback">Please enter valid Password</div>
     <span class="text-danger" *ngIf="registerForm.get('ConfirmPassword')?.errors?.minLength">Please enter 6 Char</span>
     <div class="valid-feedback">Looks good!</div>
@@ -93,31 +83,54 @@
     </div>
   </div>
 
-  <!-- <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" value="remember-me"> Remember me
-      </label>
-    </div> -->
+  <div class="form-label-group">
+    <input type="phoneNumber" id="phoneNumber" class="form-control" placeholder="phoneNumber" formControlName="phoneNumber"
+      [class.is-invalid]="" />
+    <label for="inputEmail">phoneNumber</label>
+
+    <!-- <span class="text-danger" *ngIf="
+        registerForm.get('userName')?.invalid &&
+        registerForm.get('userName')?.touched
+      ">Please enter valid User Name</span>
+    <div class="valid-feedback" *ngIf="!isUserExistOp">Looks good!</div>
+
+    <div class="text-danger" *ngIf="isUserExistOp">User name is exist</div> -->
+  </div>
+  <div class="form-label-group">
+    <input type="country" id="country" class="form-control" placeholder="country" formControlName="country"
+      [class.is-invalid]="" />
+    <label for="inputEmail">country</label>
+
+    <!-- <span class="text-danger" *ngIf="
+        registerForm.get('userName')?.invalid &&
+        registerForm.get('userName')?.touched
+      ">Please enter valid User Name</span>
+    <div class="valid-feedback" *ngIf="!isUserExistOp">Looks good!</div>
+
+    <div class="text-danger" *ngIf="isUserExistOp">User name is exist</div> -->
+  </div>
+
+<div class="form-check">
+  <label class="form-check-label">
+    <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue" checked>
+    Email Confirmed
+  </label>
+</div>
+
   <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="
       registerForm.invalid ||
       !validateConfirmPassword() ||
       isUserExist() &&
       isEmailExist()
     ">
-    Register Now
+    Add user
   </button>
 
   <div *ngIf="errorMsg" class="alert alert-danger mt-3" role="alert">
     {{ errorMsg }}
   </div>
 
-  <!-- <div class="alert alert-primary" role="alert">
-    <strong
-      >User name is :{{ this.registerForm.get("email")?.value }}+{{
-        this.registerForm.get("email")?.valid
-      }}
-    </strong>
-  </div> -->
+
 
 
 </form>

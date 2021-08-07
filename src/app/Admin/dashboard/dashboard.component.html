@@ -1,0 +1,85 @@
+<div class="wrapper">
+  <!-- Sidebar  -->
+  <nav id="sidebar">
+    <div class="sidebar-header">
+      <h3>Bootstrap Sidebar</h3>
+    </div>
+
+    <ul class="list-unstyled components">
+      <p>Dummy Heading</p>
+      <li class="active">
+        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Users</a>
+        <ul class="collapse list-unstyled" id="homeSubmenu">
+          <li>
+            <a (click)="UserListClick()">Users List</a>
+          </li>
+          <li>
+            <a (click)="AddUserClick()">Add User</a>
+          </li>
+          <li>
+            <a >Home 3</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a >About</a>
+      </li>
+      <li>
+        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+        <ul class="collapse list-unstyled" id="pageSubmenu">
+          <li>
+            <a >Page 1</a>
+          </li>
+          <li>
+            <a >Page 2</a>
+          </li>
+          <li>
+            <a >Page 3</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a >Portfolio</a>
+      </li>
+      <li>
+        <a >Contact</a>
+      </li>
+    </ul>
+
+
+  </nav>
+
+  <!-- Page Content  -->
+  <div id="content">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+
+        <button type="button" id="sidebarCollapse" class="btn btn-info">
+          <i class="fas fa-align-left"></i>
+          <span>Toggle Sidebar</span>
+        </button>
+        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+          data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <i class="fas fa-align-justify"></i>
+        </button>
+
+
+      </div>
+    </nav>
+
+    <h2>Admin</h2>
+
+    <div class="container1">
+      <div *ngIf="isUserListShow">
+        <app-users></app-users>
+
+      </div>
+      <div *ngIf="isAddUserShow">
+        <app-add-user></app-add-user>
+
+      </div>
+    </div>
+  </div>
+</div>
