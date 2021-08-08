@@ -1,7 +1,7 @@
 <form class="form-signin" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
   <div class="text-center mb-4">
 
-    <h1 class="h3 mb-3 font-weight-normal">Add New User</h1>
+    <h1 class="h3 mb-3 font-weight-normal">{{titlePage}}</h1>
   </div>
   <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="succsMsgReg">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -10,6 +10,7 @@
     </button>
     <strong>You have been successfully registered :)</strong>
   </div>
+ <label for="">{{userId}}</label>
   <div class="form-label-group">
     <input type="email" id="inputEmail" class="form-control" placeholder="Email address" formControlName="email"
       [class.is-invalid]="
@@ -35,7 +36,7 @@
         this.registerForm.get('userName')?.valid &&
         this.registerForm.get('userName')?.touched &&
         !isUserExistOp
-      " (blur)="isUserExist()" />
+      " (blur)="isUserExist()" (keyup)="isUserExist()" />
     <label for="inputEmail">User Name</label>
 
     <span class="text-danger" *ngIf="
@@ -95,11 +96,17 @@
     <div class="valid-feedback" *ngIf="!isUserExistOp">Looks good!</div>
 
     <div class="text-danger" *ngIf="isUserExistOp">User name is exist</div> -->
+
+
+
+
   </div>
-  <div class="form-label-group">
+  <!-- <div class="form-label-group">
     <input type="country" id="country" class="form-control" placeholder="country" formControlName="country"
       [class.is-invalid]="" />
-    <label for="inputEmail">country</label>
+    <label for="inputEmail">country</label> -->
+
+
 
     <!-- <span class="text-danger" *ngIf="
         registerForm.get('userName')?.invalid &&
@@ -108,6 +115,14 @@
     <div class="valid-feedback" *ngIf="!isUserExistOp">Looks good!</div>
 
     <div class="text-danger" *ngIf="isUserExistOp">User name is exist</div> -->
+  <!-- </div> -->
+
+  <div class="form-group">
+    <label for="">Country</label>
+    <select  class="form-control" name="" id="" formControlName="country" >
+      <option *ngFor="let cont of Country">{{cont}}</option>
+
+    </select>
   </div>
 
 <div class="form-check">
@@ -123,7 +138,7 @@
       isUserExist() &&
       isEmailExist()
     ">
-    Add user
+    {{titleButton}}
   </button>
 
   <div *ngIf="errorMsg" class="alert alert-danger mt-3" role="alert">

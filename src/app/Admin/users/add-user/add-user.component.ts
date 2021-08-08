@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AddUserModel } from 'src/app/Models/addUserModel';
 import { RegisterModel } from 'src/app/Models/registerModel';
 import { Users } from 'src/app/Models/users';
@@ -16,9 +17,15 @@ export class AddUserComponent implements OnInit {
   constructor(
     private form: FormBuilder,
     private registerService: RegisterService,
-    private adminService:AdminService
+    private adminService: AdminService,
+    private activeRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
+  Country = ['', 'Jordan', 'KSA', 'Pal', 'Iraq'];
+  userId: string;
+  titlePage = "Add New User";
+  titleButton = "Add new user";
   addUser: AddUserModel;
   // reg: RegisterModel;
   registerForm: FormGroup;
@@ -29,22 +36,67 @@ export class AddUserComponent implements OnInit {
   isUserExistOp = false;
   isEmailExistOp = false;
   isFormBusy: boolean;
+  userData: Users;
+  isUpdateMode: boolean;
   ngOnInit(): void {
+
+    // this.userData = null;
+    this.isUpdateMode = false;
+    this.userId = '';
     this.isFormBusy = false;
     this.AllUsers();
     this.users = [];
     this.addUser = {
-      userName:'',
-      email:'',
+      userName: '',
+      email: '',
       // emailConfirmed:true,
-      password:'',
-      phoneNumber:'',
-      country:'',
+      password: '',
+      phoneNumber: '',
+      country: '',
     };
 
     this.registerFormfunc();
     this.formValueChange();
+    this.activeRouteFunc();
     // console.log(this.registerForm.get('password')?.value);
+  }
+
+  activeRouteFunc() {
+    this.activeRoute.paramMap.subscribe(param => {
+
+      let id = param.get('id');
+      if (id) {
+        this.adminService.GetUser(id).subscribe(res => {
+          // console.log(res)
+          this.isUpdateMode = true;
+          this.userData = res;
+          this.titlePage = "Update User";
+          this.titleButton = "Update User";
+          this.UpdateUserData();
+        }, er => {
+          console.log(er)
+          this.router.navigate(['/home'])
+        })
+
+        this.userId = id;
+      }
+
+    }, error => {
+      console.log(error)
+    })
+  }
+  UpdateUserData() {
+    if (this.userData !== null) {
+      this.registerForm.patchValue({
+        userName: this.userData.userName,
+        email: this.userData.email,
+        // password: this.userData.passwordHash,
+        phoneNumber: this.userData.phoneNumber,
+        country: this.userData.country
+
+      })
+
+    }
   }
 
   formValueChange() {
@@ -139,15 +191,52 @@ export class AddUserComponent implements OnInit {
     );
   }
 
+  // isUserExist1() {
+  //   var name = this.registerForm.value.userName;
+
+  //   if (name !== null && name !== '') {
+
+  //     for (const user of this.users.values()) {
+  //       if (this.isUpdateMode && user.userName === name && user.id == this.userData.id) {
+  //         console.log("omar")
+  //         console.log(this.isUpdateMode)
+  //         this.isUserExistOp = false;
+
+  //       }
+  //       else if (this.isUpdateMode && user.userName === name && user.id !== this.userData.id) {
+  //         console.log("alsaheb")
+  //         console.log(this.isUpdateMode)
+  //         this.isUserExistOp = true;
+  //       }
+
+  //     }
+
+  //   }
+
+  //   return false;
+  // }
+
+
   isUserExist() {
     const name = this.registerForm.value.userName;
     if (name != null && this.registerForm.get('userName')?.touched && name != '' && this.isFormBusy === false) {
       this.registerService.UserExists(name).subscribe((res) => {
-        this.isUserExistOp = true;
-        console.log('user is exist :'+this.isUserExistOp)
+        for (const user of this.users.values()) {
+          if (this.isUpdateMode && user.userName === name && user.id == this.userData.id) {
+            this.isUserExistOp = false;
+          }
+          else if (this.isUpdateMode && user.userName === name && user.id !== this.userData.id) {
+            this.isUserExistOp = true;
+
+          }
+          else if (!this.isUpdateMode) {
+            this.isUserExistOp = true;
+          }
+        }
+
       }, er => {
         this.isUserExistOp = false;
-        console.log('user is not exist :'+this.isUserExistOp)
+
       })
       return true
 
@@ -156,18 +245,58 @@ export class AddUserComponent implements OnInit {
 
   }
 
+
+
   isEmailExist() {
     const email = this.registerForm.value.email;
     if (email != null && this.registerForm.get('email')?.touched && email != '' && this.isFormBusy === false) {
       this.registerService.EmailExists(email).subscribe((res) => {
-        this.isEmailExistOp = true;
-        console.log('email is exist :'+this.isEmailExistOp)
+        for (const user of this.users.values()) {
+          if (this.isUpdateMode && user.email === email && user.id == this.userData.id) {
+            this.isUserExistOp = false;
+          }
+          else if (this.isUpdateMode && user.email === email && user.id !== this.userData.id) {
+            this.isEmailExistOp = true;
+
+          }
+          else if (!this.isUpdateMode) {
+            this.isEmailExistOp = true;
+          }
+        }
+        // console.log('email is exist :'+this.isEmailExistOp)
       }, er => {
         this.isEmailExistOp = false;
-        console.log('email is not exist :'+this.isEmailExistOp)
+        // console.log('email is not exist :'+this.isEmailExistOp)
       })
       return true;
     }
     return false;
   }
+
+
+
+
+  // isEmailExist() {
+  //   const email = this.registerForm.value.email;
+  //   if (email != null && this.registerForm.get('email')?.touched && email != '' && this.isFormBusy === false) {
+  //     this.registerService.EmailExists(email).subscribe((res) => {
+  //       this.isEmailExistOp = true;
+  //       console.log('email is exist :'+this.isEmailExistOp)
+  //     }, er => {
+  //       this.isEmailExistOp = false;
+  //       console.log('email is not exist :'+this.isEmailExistOp)
+  //     })
+  //     return true;
+  //   }
+  //   return false;
+  // }
+
+
+
+
+
+
 }
+
+
+

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Users } from 'src/app/Models/users';
 import { AdminService } from 'src/app/Service/admin.service';
 
@@ -9,7 +10,7 @@ import { AdminService } from 'src/app/Service/admin.service';
 })
 export class UsersComponent implements OnInit {
 
-  constructor(private adminService: AdminService) { }
+  constructor(private adminService: AdminService, private router: Router) { }
 
   isUserListShow: boolean;
   isAddUserShow: boolean;
@@ -24,7 +25,7 @@ export class UsersComponent implements OnInit {
 
   getAllUsersCo() {
     this.adminService.getAllUsers().subscribe((res) => {
-      this.users=res;
+      this.users = res;
       // console.log(this.users)
     }, error => {
       console.log(error)
@@ -33,7 +34,11 @@ export class UsersComponent implements OnInit {
 
 
 
+  edit(id: string) {
+    // alert(id)
+    this.router.navigate(['/admin/users/edit-user', id]);
 
+  }
 
 
 

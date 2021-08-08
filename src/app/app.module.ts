@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './Admin/dashboard/dashboard.component';
 import { UsersComponent } from './Admin/users/users.component';
 import { AddUserComponent } from './Admin/users/add-user/add-user.component';
+import { EditUserComponent } from './Admin/users/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AddUserComponent } from './Admin/users/add-user/add-user.component';
     FooterComponent,
     DashboardComponent,
     UsersComponent,
-    AddUserComponent
+    AddUserComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,

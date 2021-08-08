@@ -24,6 +24,11 @@ export class AdminService {
   getAllUsers(): Observable<Users[]> {
     return this.http.get<Users[]>(this.baseUrl + '/GetAllUsers',{withCredentials: true}).pipe();
   }
+
+  GetUser(id:string): Observable<Users> {
+    return this.http.get<Users>(this.baseUrl +  '/GetUser/'+id,{withCredentials: true}).pipe();
+  }
+
   AddNewUser(add: AddUserModel): Observable<AddUserModel> {
     return this.http
       .post<AddUserModel>(this.baseUrl + '/AddUser', add, this.headers)

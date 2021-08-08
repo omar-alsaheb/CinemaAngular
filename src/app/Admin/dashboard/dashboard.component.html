@@ -70,6 +70,13 @@
     </nav>
 
     <h2>Admin</h2>
+    <div class="alert alert-primary" role="alert">
+      <strong>User List</strong>
+      <div>
+        <button type="button" class="btn btn-success" (click)="AddUserClick()"> Add new User</button>
+      </div>
+    </div>
+
 
     <div class="container1">
       <div *ngIf="isUserListShow">

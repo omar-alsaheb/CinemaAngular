@@ -20,7 +20,7 @@
       " [class.is-valid]="
         this.registerForm.get('email')?.valid &&
         this.registerForm.get('email')?.touched
-      " (blur)="isEmailExist()" />
+      " (blur)="isEmailExist()"  (keyup)="isEmailExist()"/>
     <label for="inputEmail">Email address</label>
     <span class="text-danger" *ngIf="
         registerForm.get('email')?.invalid && registerForm.get('email')?.touched
@@ -37,7 +37,7 @@
         this.registerForm.get('userName')?.valid &&
         this.registerForm.get('userName')?.touched &&
         !isUserExistOp
-      " (blur)="isUserExist()" />
+      " (blur)="isUserExist()" (keyup)="isUserExist()"/>
     <label for="inputEmail">User Name</label>
 
     <span class="text-danger" *ngIf="
