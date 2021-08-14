@@ -1,0 +1,17 @@
+<table class="table">
+  <thead>
+    <tr class="bg-dark text-light">
+      <th>User Name</th>
+      <th>Role Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let i of usersRole">
+      <td scope="row">{{i.userName}}</td>
+      <td>{{i.roleName}}</td>
+      <td><button type="button" class="btn btn-primary btn-sm" (click)="gotoEditPage(i.userId,i.roleId)">Edit Role</button></td>
+    </tr>
+
+  </tbody>
+</table>

@@ -24,6 +24,8 @@ export class RegisterComponent implements OnInit {
   isUserExistOp = false;
   isEmailExistOp = false;
   isFormBusy: boolean;
+   error1=false;
+   errorMSG=''
   ngOnInit(): void {
     this.isFormBusy = false;
     this.AllUsers();
@@ -40,6 +42,7 @@ export class RegisterComponent implements OnInit {
   }
 
   formValueChange() {
+
     this.registerForm.valueChanges.subscribe((res) => {
       if (this.registerForm.status == 'VALID') {
         console.log(this.registerForm);
@@ -85,13 +88,16 @@ export class RegisterComponent implements OnInit {
           this.succsMsg = 'You have successfully registered';
           console.log(this.succsMsg);
           console.log(res);
+          this.succsMsgReg = true;
         },
         (error) => {
-          console.log(error);
+           this.error1=true;
+           this.errorMSG=error.error
+          console.log(error.error);
         }
       );
       this.registerForm.reset();
-      this.succsMsgReg = true;
+
       console.log(this.succsMsgReg)
     }
 
@@ -132,6 +138,7 @@ export class RegisterComponent implements OnInit {
       this.registerService.UserExists(name).subscribe((res) => {
         this.isUserExistOp = true;
         console.log('user is exist :'+this.isUserExistOp)
+        console.log("saaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
       }, er => {
         this.isUserExistOp = false;
         console.log('user is not exist :'+this.isUserExistOp)

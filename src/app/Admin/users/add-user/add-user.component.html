@@ -50,7 +50,7 @@
 
   <div class="form-label-group">
     <input [readonly]="!!isUserExistOp || !!isEmailExistOp" type="password" id="inputPassword" class="form-control"
-      placeholder="Password" required="" formControlName="password" [class.is-invalid]="
+      placeholder="Password"  formControlName="password" [class.is-invalid]="
         this.registerForm.get('password')?.invalid &&
         registerForm.get('password')?.touched
       " [class.is-valid]="
@@ -64,9 +64,9 @@
     <div class="valid-feedback">Looks good!</div>
   </div>
 
-  <div class="form-label-group">
+  <div class="form-label-group" [hidden]="!registerForm.get('password')?.valid">
     <input [readonly]="!!isUserExistOp || !!isEmailExistOp" type="password" id="ConfirmPassword" class="form-control"
-      placeholder="ConfirmPassword" required="" formControlName="ConfirmPassword" [class.is-invalid]="
+      placeholder="ConfirmPassword" formControlName="ConfirmPassword" [class.is-invalid]="
         this.registerForm.get('ConfirmPassword')?.invalid &&
         registerForm.get('ConfirmPassword')?.touched
       " [class.is-valid]="
@@ -134,7 +134,7 @@
 
   <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="
       registerForm.invalid ||
-      !validateConfirmPassword() ||
+
       isUserExist() &&
       isEmailExist()
     ">

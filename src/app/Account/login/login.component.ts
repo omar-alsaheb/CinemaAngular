@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
           this.loginFials = false;
           this.logninForm.reset();
 
-          // this.route.navigate(['home'])
+          // this.route.navigate(['home']).then(x=>{window.location.reload()});
         },
         (error) => {
           // console.log(error);

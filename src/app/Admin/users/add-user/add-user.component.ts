@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddUserModel } from 'src/app/Models/addUserModel';
+import { EditUserModel } from 'src/app/Models/EditUserModel';
 import { RegisterModel } from 'src/app/Models/registerModel';
 import { Users } from 'src/app/Models/users';
 import { AdminService } from 'src/app/Service/admin.service';
@@ -38,8 +39,19 @@ export class AddUserComponent implements OnInit {
   isFormBusy: boolean;
   userData: Users;
   isUpdateMode: boolean;
+  editUserModel: EditUserModel;
+  id: string | any;
   ngOnInit(): void {
-
+    this.id = '';
+    this.editUserModel= {
+      id:"",
+      userName:"",
+      email:"",
+      emailConfirmed:true,
+      password:"",
+      phoneNumber:"",
+      country:""
+    }
     // this.userData = null;
     this.isUpdateMode = false;
     this.userId = '';
@@ -61,6 +73,58 @@ export class AddUserComponent implements OnInit {
     // console.log(this.registerForm.get('password')?.value);
   }
 
+  onSubmit() {
+    if (this.registerForm.valid && !this.isUserExistOp && !this.isEmailExistOp) {
+      if (!this.isUpdateMode) {
+        this.validRegsModel();
+        // console.log(this.registerForm.value)
+        this.adminService.AddNewUser(this.addUser).subscribe(
+          (res) => {
+            this.succsMsg = 'You have successfully registered';
+            console.log(this.succsMsg);
+            // console.log(res);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+        this.registerForm.reset();
+        this.succsMsgReg = true;
+        console.log(this.succsMsgReg)
+      }
+      else {
+        this.validEditUserModel();
+        this.adminService.EditUser(this.editUserModel).subscribe(res => {
+          console.log(res)
+          console.log("Done")
+        }, er => {
+          console.log("Error")
+          console.log(er)
+        })
+        console.log(this.registerForm.value)
+      }
+    }
+
+    // console.log(this.registerForm.value)
+  }
+
+
+  validRegsModel() {
+    this.addUser.userName = this.registerForm.value.userName;
+    this.addUser.email = this.registerForm.value.email;
+    this.addUser.phoneNumber = this.registerForm.value.phoneNumber;
+    this.addUser.country = this.registerForm.value.country;
+    this.addUser.password = this.registerForm.value.password;
+  }
+  validEditUserModel() {
+    this.editUserModel.id = this.id;
+    this.editUserModel.userName = this.registerForm.value.userName;
+    this.editUserModel.email = this.registerForm.value.email;
+    this.editUserModel.phoneNumber = this.registerForm.value.phoneNumber;
+    this.editUserModel.country = this.registerForm.value.country;
+    this.editUserModel.password = this.registerForm.value.password;
+  }
+
   activeRouteFunc() {
     this.activeRoute.paramMap.subscribe(param => {
 
@@ -73,6 +137,7 @@ export class AddUserComponent implements OnInit {
           this.titlePage = "Update User";
           this.titleButton = "Update User";
           this.UpdateUserData();
+          this.id = id;
         }, er => {
           console.log(er)
           this.router.navigate(['/home'])
@@ -90,7 +155,7 @@ export class AddUserComponent implements OnInit {
       this.registerForm.patchValue({
         userName: this.userData.userName,
         email: this.userData.email,
-        // password: this.userData.passwordHash,
+        password: this.userData.passwordHash,
         phoneNumber: this.userData.phoneNumber,
         country: this.userData.country
 
@@ -107,6 +172,7 @@ export class AddUserComponent implements OnInit {
         this.isFormBusy = true;
       }
     }, er => {
+      console.log("form is not valid");
       console.log(er)
     })
   }
@@ -125,7 +191,7 @@ export class AddUserComponent implements OnInit {
           Validators.pattern(
             '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,}'
           ),
-        ],
+        ]
       ],
       ConfirmPassword: [
         '',
@@ -135,38 +201,11 @@ export class AddUserComponent implements OnInit {
           Validators.pattern(
             '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,}'
           ),
-        ],
+        ]
       ],
     });
   }
-  onSubmit() {
-    if (this.registerForm.valid && !this.isUserExistOp && !this.isEmailExistOp) {
-      this.validRegsModel();
-      // console.log(this.registerForm.value)
-      this.adminService.AddNewUser(this.addUser).subscribe(
-        (res) => {
-          this.succsMsg = 'You have successfully registered';
-          console.log(this.succsMsg);
-          // console.log(res);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-      this.registerForm.reset();
-      this.succsMsgReg = true;
-      console.log(this.succsMsgReg)
-    }
 
-    // console.log(this.registerForm.value)
-  }
-  validRegsModel() {
-    this.addUser.userName = this.registerForm.value.userName;
-    this.addUser.email = this.registerForm.value.email;
-    this.addUser.phoneNumber = this.registerForm.value.phoneNumber;
-    this.addUser.country = this.registerForm.value.country;
-    this.addUser.password = this.registerForm.value.password;
-  }
   validateConfirmPassword() {
     if (
       this.registerForm.value.password !==

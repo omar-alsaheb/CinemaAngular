@@ -1,6 +1,5 @@
-
 <div>
-  <table class="table table-responsive bg-light border">
+  <table class="table table-responsive bg-light border" id="tbl">
     <thead>
       <tr class="bg-dark text-light">
         <th>User Name</th>
@@ -8,22 +7,63 @@
         <th>Phone Number</th>
         <th>Country</th>
         <th>ِAction</th>
+        <th><input type="checkbox" name="" id="" class="ckheader" (change)="SelectAll()"></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let user of users">
 
+
         <td scope="row">{{user.userName}}</td>
         <td>{{user.email}}</td>
         <td>{{user.phoneNumber}}</td>
         <td>{{user.country}}</td>
-        <td><button type="button" class="btn btn-primary btn-sm" (click)="edit(user.id)">Edit</button></td>
+        <td><button type="button" class="btn btn-primary btn-sm" (click)="edit(user.id)">Edit</button>
+          -|-
+          <button type="button" class="btn btn-danger btn-sm" (click)="DeleteUser(user.id)" data-toggle="modal"
+            data-target="#modelId">Delete</button>
+
+
+
+
+          </td>
+        <td> <input type="checkbox" class="ckitem" value="{{user.id}}">
+        </td>
+
+
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+        aria-hidden="true" >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Are you sure ?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              This Id :
+              {{userId}} Will be deleted
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" (click)="DeleteUserCinfirm()">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       </tr>
-      <tr>
-        <td scope="row"></td>
-        <td></td>
-        <td></td>
-      </tr>
+
     </tbody>
   </table>
 </div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
+  Launch
+</button>

@@ -8,8 +8,10 @@ import { CryptService } from './crypt.service';
 export class AuthService {
   constructor(private http: HttpClient, private crypto: CryptService) { }
   baseUrl = 'https://localhost:44378/api/Account/';
+  email: string;
+  expire: string;
+  roleName: string;
 
-  roleName:string;
 
   initStorge(rem: boolean, email: string) {
     const day = new Date();
@@ -30,13 +32,15 @@ export class AuthService {
       !!localStorage.getItem('expir')
     ) {
 
-      const email = this.crypto.Decrypt(localStorage.getItem('email'));
+      this.email = this.crypto.Decrypt(localStorage.getItem('email'));
       this.roleName = this.crypto.Decrypt(localStorage.getItem('roleName'));
-      const expir = this.crypto.Decrypt(localStorage.getItem('expir'));
-      if (email != null && this.roleName != null && expir != null) {
-        console.log(this.roleName,email);
+      this.expire = this.crypto.Decrypt(localStorage.getItem('expir'));
 
-        this.ValidateUser(email, this.roleName).subscribe(
+      if (this.email != null && this.roleName != null && this.expire != null) {
+        // console.log(this.roleName, this.email);
+
+        // console.log(this.roleName + "  Thisssss")
+        this.ValidateUser(this.email, this.roleName).subscribe(
           (r) => {
             console.log("user auth");
           },
@@ -52,7 +56,7 @@ export class AuthService {
       (r) => {
         localStorage.setItem('roleName', this.crypto.Encrypt(r));
         this.roleName = r;
-        
+
       },
       (e) => {
         console.log(e);
@@ -80,3 +84,5 @@ export class AuthService {
       .pipe();
   }
 }
+
+

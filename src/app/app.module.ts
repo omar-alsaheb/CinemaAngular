@@ -14,6 +14,12 @@ import { DashboardComponent } from './Admin/dashboard/dashboard.component';
 import { UsersComponent } from './Admin/users/users.component';
 import { AddUserComponent } from './Admin/users/add-user/add-user.component';
 import { EditUserComponent } from './Admin/users/edit-user/edit-user.component';
+import { UsersRoleComponent } from './Admin/users/users-role/users-role.component';
+import { Page404Component } from './page404/page404.component';
+import { Page403Component } from './page403/page403.component';
+import { GurdsService } from './Service/gurds.service';
+import { EditUserRoleComponent } from './Admin/users/edit-user-role/edit-user-role.component';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +32,11 @@ import { EditUserComponent } from './Admin/users/edit-user/edit-user.component';
     DashboardComponent,
     UsersComponent,
     AddUserComponent,
-    EditUserComponent
+    EditUserComponent,
+    UsersRoleComponent,
+    Page404Component,
+    Page403Component,
+    EditUserRoleComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +44,7 @@ import { EditUserComponent } from './Admin/users/edit-user/edit-user.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [GurdsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

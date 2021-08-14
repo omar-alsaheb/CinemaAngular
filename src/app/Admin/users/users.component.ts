@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Users } from 'src/app/Models/users';
 import { AdminService } from 'src/app/Service/admin.service';
+import * as $ from 'jquery';
+
 
 @Component({
   selector: 'app-users',
@@ -14,9 +16,11 @@ export class UsersComponent implements OnInit {
 
   isUserListShow: boolean;
   isAddUserShow: boolean;
-
+  userId: string;
   users: Users[];
+  active = false;
   ngOnInit(): void {
+    this.active = true;
     this.getAllUsersCo();
 
     this.isAddUserShow = false;
@@ -48,4 +52,30 @@ export class UsersComponent implements OnInit {
     return this.isAddUserShow = true;
 
   }
+
+  DeleteUser(id: string) {
+    this.userId = id;
+
+  }
+
+  DeleteUserCinfirm() {
+    this.adminService.DeleteUser(this.userId).subscribe(res => {
+      console.log(res)
+      document.getElementById("modelId")?.classList.remove("show")
+      this.getAllUsersCo();
+
+    }, er => {
+      console.log(er)
+      document.getElementById("modelId")?.classList.remove("show")
+
+    })
+
+    document.getElementById("modelId")?.classList.remove("show")
+
+  }
+
+  SelectAll() {
+
+  }
+
 }

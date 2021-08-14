@@ -17,7 +17,7 @@
             <a (click)="AddUserClick()">Add User</a>
           </li>
           <li>
-            <a >Home 3</a>
+            <a (click)="ShowEditUserComponent()">Edit Roles</a>
           </li>
         </ul>
       </li>
@@ -85,6 +85,11 @@
       </div>
       <div *ngIf="isAddUserShow">
         <app-add-user></app-add-user>
+
+      </div>
+
+      <div *ngIf="isShowEditUserComponent">
+       <app-users-role></app-users-role>
 
       </div>
     </div>

@@ -1,0 +1,19 @@
+<div class="container">
+  <form [formGroup]="roleForm" (ngSubmit)="EditRole()" class="form-signin">
+    <div class="form-label-group">
+      <label for=""></label>
+      <input type="text" name="userName" id="userName" class="form-control" formControlName="userName">
+
+    </div>
+    <div class="form-label-group">
+      <label for=""></label>
+      <select class="form-control" name="" id="sdsdsd"  formControlName="roleName" >
+        <option *ngFor="let name of roleModel" value="{{name.id}}">{{name.name}}</option>
+
+
+      </select>
+     </div>
+
+     <button type="button" class="btn btn-primary">Save</button>
+  </form>
+</div>

@@ -5,7 +5,7 @@
       alt="" width="72" height="72" />
     <h1 class="h3 mb-3 font-weight-normal">Register</h1>
   </div>
-  <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="succsMsgReg">
+  <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="succsMsgReg ">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
       <span class="sr-only">Close</span>
@@ -107,8 +107,8 @@
     Register Now
   </button>
 
-  <div *ngIf="errorMsg" class="alert alert-danger mt-3" role="alert">
-    {{ errorMsg }}
+  <div *ngIf="errorMsg || error1" class="alert alert-danger mt-3" role="alert">
+    {{ errorMsg }}  {{errorMSG}}
   </div>
 
   <!-- <div class="alert alert-primary" role="alert">
