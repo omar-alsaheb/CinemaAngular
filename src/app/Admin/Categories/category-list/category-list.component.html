@@ -1,0 +1,23 @@
+<div>
+  <button type="button" class="btn btn-primary" (click)="AddCategory()">Add Category</button>
+  <table class="table mt-3">
+    <thead>
+      <tr class="bg-dark text-light">
+        <th>Category Name</th>
+        <th>Action</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let i of categories">
+        <td scope="row">{{i.categoryName}}</td>
+        <td> <button type="button" class="btn btn-primary" (click)="EditCategory(i.id,i.categoryName)">Edit</button> - <button
+            type="button" class="btn btn-danger" (click)="DeleteCategory(i.id)">Delete</button></td>
+
+
+      </tr>
+
+    </tbody>
+  </table>
+
+</div>

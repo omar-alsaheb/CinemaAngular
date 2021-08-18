@@ -19,6 +19,12 @@ import { Page404Component } from './page404/page404.component';
 import { Page403Component } from './page403/page403.component';
 import { GurdsService } from './Service/gurds.service';
 import { EditUserRoleComponent } from './Admin/users/edit-user-role/edit-user-role.component';
+import { CategoryListComponent } from './Admin/Categories/category-list/category-list.component';
+import { AddCategoryComponent } from './Admin/Categories/add-category/add-category.component';
+import { SubCategoryComponent } from './Admin/SubCategories/sub-category/sub-category.component';
+import { SubCategoryListComponent } from './Admin/SubCategories/sub-category-list/sub-category-list.component';
+import { ActorListComponent } from './Admin/Actors/actor-list/actor-list.component';
+import { AddActorComponent } from './Admin/Actors/add-actor/add-actor.component';
 
 
 @NgModule({
@@ -37,6 +43,12 @@ import { EditUserRoleComponent } from './Admin/users/edit-user-role/edit-user-ro
     Page404Component,
     Page403Component,
     EditUserRoleComponent,
+    CategoryListComponent,
+    AddCategoryComponent,
+    SubCategoryComponent,
+    SubCategoryListComponent,
+    ActorListComponent,
+    AddActorComponent,
   ],
   imports: [
     BrowserModule,

@@ -11,20 +11,43 @@
         <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Users</a>
         <ul class="collapse list-unstyled" id="homeSubmenu">
           <li>
-            <a (click)="UserListClick()">Users List</a>
+            <a (click)="UserListClick()" style="cursor: pointer;">Users List</a>
           </li>
           <li>
-            <a (click)="AddUserClick()">Add User</a>
+            <a (click)="AddUserClick()" style="cursor: pointer;">Add User</a>
           </li>
           <li>
-            <a (click)="ShowEditUserComponent()">Edit Roles</a>
+            <a (click)="ShowEditUserComponent()" style="cursor: pointer;">Edit Roles</a>
           </li>
         </ul>
       </li>
+
       <li>
-        <a >About</a>
+        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Category</a>
+        <ul class="collapse list-unstyled" id="pageSubmenu">
+          <li>
+            <a style="cursor: pointer;" (click)="ShowCategory()">Category List</a>
+          </li>
+          <li>
+            <a style="cursor: pointer;">Add Category</a>
+          </li>
+          <li>
+            <a style="cursor: pointer;" (click)="ShowSubCat()">Sub Category List</a>
+          </li>
+        </ul>
       </li>
+
       <li>
+        <a href="#actor" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Actors</a>
+        <ul class="collapse list-unstyled" id="actor">
+          <li>
+            <a style="cursor: pointer;" (click)="showActorList()">Actor List</a>
+          </li>
+
+
+        </ul>
+      </li>
+      <!-- <li>
         <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
         <ul class="collapse list-unstyled" id="pageSubmenu">
           <li>
@@ -37,13 +60,8 @@
             <a >Page 3</a>
           </li>
         </ul>
-      </li>
-      <li>
-        <a >Portfolio</a>
-      </li>
-      <li>
-        <a >Contact</a>
-      </li>
+      </li> -->
+
     </ul>
 
 
@@ -89,8 +107,20 @@
       </div>
 
       <div *ngIf="isShowEditUserComponent">
-       <app-users-role></app-users-role>
+        <app-users-role></app-users-role>
 
+      </div>
+      <div *ngIf="isCategoryShow">
+        <app-category-list></app-category-list>
+
+      </div>
+      <div *ngIf="isSubCatShow">
+        <app-sub-category-list></app-sub-category-list>
+
+      </div>
+      <div *ngIf="isActorListShow">
+
+<app-actor-list></app-actor-list>
       </div>
     </div>
   </div>

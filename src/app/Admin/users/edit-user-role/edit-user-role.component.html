@@ -7,13 +7,13 @@
     </div>
     <div class="form-label-group">
       <label for=""></label>
-      <select class="form-control" name="" id="sdsdsd"  formControlName="roleName" >
+      <select class="form-control" name="" id="sdsdsd"  formControlName="roleName"(change)="onRoleChange()" >
         <option *ngFor="let name of roleModel" value="{{name.id}}">{{name.name}}</option>
 
 
       </select>
      </div>
 
-     <button type="button" class="btn btn-primary">Save</button>
+     <button type="submit" class="btn btn-primary">Save</button>
   </form>
 </div>

@@ -1,0 +1,24 @@
+<div>
+  <table class="table table-responsive bg-light border table-hover" id="tbl">
+    <thead>
+      <tr class="bg-dark text-light">
+        <th>Actor Name</th>
+        <th>Image</th>
+        <th>ِAction</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let i of actorList">
+        <td><img src="{{i.actorPicture}}" alt=""></td>
+        <td scope="row">{{i.actorName}}</td>
+        <td><button type="button" class="btn btn-primary btn-sm" (click)="editActor(i.id)">Edit</button>
+          -|-
+          <button type="button" class="btn btn-danger btn-sm" (click)="deleteItem(i.id)">Delete</button>
+         </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+

@@ -1,0 +1,25 @@
+<form class="form-signin" [formGroup]="addNewCategoryForm" (ngSubmit)="onSubmit()">
+  <div class="text-center mb-4">
+
+    <h1 class="h3 mb-3 font-weight-normal">{{categoryTitle}}</h1>
+  </div>
+  <div class="alert alert-success alert-dismissible fade show" role="alert" >
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+      <span class="sr-only">Close</span>
+    </button>
+    <strong>You have been {{categoryTitle}} :)</strong>
+  </div>
+  <div class="form-label-group">
+    <input type="text" id="categoryName" class="form-control" placeholder="categoryName" formControlName="categoryName" />
+    <label for="AddNewCategory">{{categoryTitle}}</label>
+
+
+  </div>
+
+  <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!addNewCategoryForm.valid">
+    {{categoryTitle}}
+  </button>
+</form>
+
+
