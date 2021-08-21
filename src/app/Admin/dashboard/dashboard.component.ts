@@ -15,14 +15,19 @@ export class DashboardComponent implements OnInit {
   isShowEditUserComponent: boolean
   isCategoryShow: boolean;
   isSubCatShow: boolean;
-  isActorListShow:boolean
+  isActorListShow: boolean;
+  isMovieListShow: boolean;
+
 
   ngOnInit(): void {
     this.isUserListShow = false;
     this.isAddUserShow = false;
     this.isShowEditUserComponent = false;
     this.isSubCatShow = false;
-    this.isActorListShow=false;
+    this.isActorListShow = false;
+    this.isMovieListShow = false;
+
+
     $(document).ready(function () {
       $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
@@ -40,6 +45,9 @@ export class DashboardComponent implements OnInit {
     this.isShowEditUserComponent = false;
     this.isCategoryShow = false;
     this.isSubCatShow = false
+    this.isActorListShow = false
+    this.isMovieListShow = false;
+
     return this.isUserListShow = true;
   }
 
@@ -48,6 +56,9 @@ export class DashboardComponent implements OnInit {
     this.isShowEditUserComponent = false;
     this.isSubCatShow = false
     this.isCategoryShow = false;
+    this.isActorListShow = false
+    this.isMovieListShow = false;
+
     return this.isAddUserShow = true;
 
   }
@@ -57,6 +68,9 @@ export class DashboardComponent implements OnInit {
     this.isAddUserShow = false;
     this.isSubCatShow = false
     this.isCategoryShow = false;
+    this.isActorListShow = false
+    this.isMovieListShow = false;
+
     return this.isShowEditUserComponent = true;
   }
 
@@ -65,6 +79,9 @@ export class DashboardComponent implements OnInit {
     this.isAddUserShow = false;
     this.isShowEditUserComponent = false;
     this.isSubCatShow = false
+    this.isActorListShow = false
+    this.isMovieListShow = false;
+
     return this.isCategoryShow = true;
   }
   ShowSubCat() {
@@ -72,15 +89,29 @@ export class DashboardComponent implements OnInit {
     this.isAddUserShow = false;
     this.isShowEditUserComponent = false;
     this.isCategoryShow = false;
+    this.isActorListShow = false
+    this.isMovieListShow = false;
+
     return this.isSubCatShow = true
   }
 
-  showActorList(){
+  showActorList() {
     this.isUserListShow = false;
     this.isAddUserShow = false;
     this.isShowEditUserComponent = false;
     this.isCategoryShow = false;
-     this.isSubCatShow = false
-     return this.isActorListShow = true
+    this.isSubCatShow = false
+    this.isMovieListShow = false;
+    return this.isActorListShow = true
+  }
+  showMovieList() {
+    this.isUserListShow = false;
+    this.isAddUserShow = false;
+    this.isShowEditUserComponent = false;
+    this.isCategoryShow = false;
+    this.isSubCatShow = false
+    this.isActorListShow = false
+    return this.isMovieListShow = true;
+
   }
 }

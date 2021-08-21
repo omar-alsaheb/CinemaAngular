@@ -5,6 +5,7 @@ import { RegisterComponent } from './Account/register/register.component';
 import { AddActorComponent } from './Admin/Actors/add-actor/add-actor.component';
 import { AddCategoryComponent } from './Admin/Categories/add-category/add-category.component';
 import { DashboardComponent } from './Admin/dashboard/dashboard.component';
+import { AddMovieComponent } from './Admin/Movies/add-movie/add-movie.component';
 import { SubCategoryComponent } from './Admin/SubCategories/sub-category/sub-category.component';
 import { AddUserComponent } from './Admin/users/add-user/add-user.component';
 import { EditUserRoleComponent } from './Admin/users/edit-user-role/edit-user-role.component';
@@ -34,6 +35,7 @@ const routes: Routes = [
   {path:'edit-sub-cat/:id/:name/:id1',component:SubCategoryComponent},
   {path:'add-actor',component:AddActorComponent},
   {path:'edit-actor/:id',component:AddActorComponent},
+  {path:'add-movie',component:AddMovieComponent},
 
 
 

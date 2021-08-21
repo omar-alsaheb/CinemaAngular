@@ -9,7 +9,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let i of actorList">
-        <td><img src="{{i.actorPicture}}" alt=""></td>
+        <td><img class="img-fluid rounded-circle h-im img-thumbnail" src="{{imgPath+ i.actorPicture}}" alt=""></td>
         <td scope="row">{{i.actorName}}</td>
         <td><button type="button" class="btn btn-primary btn-sm" (click)="editActor(i.id)">Edit</button>
           -|-

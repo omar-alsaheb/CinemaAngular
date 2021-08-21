@@ -13,6 +13,7 @@ export class ActorListComponent implements OnInit {
   constructor(private service: AdminService,private router:Router) { }
 
   actorList: Actor[]
+  imgPath:string;
   ngOnInit(): void {
     this.getlist();
   }
@@ -21,7 +22,7 @@ export class ActorListComponent implements OnInit {
   getlist() {
     this.service.GetAllActors().subscribe(r => {
       this.actorList = r;
-
+      this.imgPath="https://localhost:44378/images/actors/"
     }, e => {
       console.log(e)
     })

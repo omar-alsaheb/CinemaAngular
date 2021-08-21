@@ -1,0 +1,82 @@
+<div class="container mt-4 mb-4">
+  <h5>Add new Movie</h5>
+  <hr class="mb-4" />
+  <!-- <button type="button" class="btn btn-primary mb-4">Go To actors List</button> -->
+  <div class="alert alert-success" role="alert" *ngIf="">
+    <strong>msg</strong>
+  </div>
+  <div class="movie-container">
+    <div class="movie">
+      <form [formGroup]="movieForms" (ngSubmit)="AddMovie()">
+        <div class="row">
+          <div class="col-md-4 center">
+
+            <img class="img-fluid rounded-circle w-50 img-thumbnail" [src]="url" alt="">
+
+            <!-- <img src="../../../../assets/img/deff.png" alt=""> -->
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="">Movie Img</label>
+          <input type="file" class="form-control-file" accept="image/*" name="" id="" placeholder=""
+            aria-describedby="fileHelpId" formControlName="actorImage" (change)="HandleFiles($event)">
+          <!-- <small id="fileHelpId" class="form-text text-muted">Help text</small> -->
+        </div>
+        <div class="form-group">
+          <label for="">Choose a Sub Category</label>
+          <select class="form-control" name="" id="" formControlName="subCatId">
+            <option *ngFor="let i of subCat" [value]="i.id">{{i.subCategoryName}}</option>
+
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="AddNewCategory">Movie Name</label>
+          <input type="text" id="movieName" class="form-control " placeholder="Movie Name"
+            formControlName="movieName" />
+        </div>
+
+        <div class="form-group">
+          <label for="AddNewCategory">Movie Story</label>
+          <textarea type="text" id="movieStory" class="form-control " placeholder="Movie Story"
+            formControlName="movieStory" rows="4" cols="50"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="AddNewCategory">Movie Trailer</label>
+          <input type="text" id="movieTrailer" class="form-control " placeholder="movieTrailer"
+            formControlName="movieTrailer" />
+        </div>
+
+        <div class="form-group">
+          <label for="">Choose Actor</label>
+          <select class="form-control" name="" id="" formControlName="actId" (change)="actorOnChange()" id="actor-selc">
+            <option *ngFor="let i of actors" [value]="i.id">{{i.actorName}}</option>
+
+          </select>
+        </div>
+        <div>
+          <div formArrayName="actorControl" *ngFor="let act of actorControl.controls; let i=index;"
+            class="d-inline-block p-2" id="">
+            <div [formGroupName]="i" class="d-inline-block">
+              <div class="alert alert-primary alert-dismissible fade show d-inline-block" role="alert"
+                *ngIf="act.value.actId>0">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="removeActor(i)">
+                  <span aria-hidden="true">&times;</span>
+                  <span class="sr-only">Close</span>
+                </button>
+                <input type="hidden" formControlName="actId" class="input-group" [value]="act.value.actId">
+                <label for="actName">{{act.value.actName}}</label>
+                <input type="hidden" formControlName="actName" class="input-group cust" id="actName" readonly
+                  [value]="act.value.actName">
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="">add</button>
+      </form>
+
+    </div>
+  </div>
+</div>

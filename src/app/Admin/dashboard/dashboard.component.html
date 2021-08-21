@@ -43,7 +43,22 @@
           <li>
             <a style="cursor: pointer;" (click)="showActorList()">Actor List</a>
           </li>
+          <li>
+            <a style="cursor: pointer;" routerLink="/add-actor">Add Actor</a>
+          </li>
 
+        </ul>
+      </li>
+
+      <li>
+        <a href="#movie" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Movies</a>
+        <ul class="collapse list-unstyled" id="movie">
+          <li>
+            <a style="cursor: pointer;" (click)="showMovieList()">Movie List</a>
+          </li>
+          <li>
+            <a style="cursor: pointer;" routerLink="">Add Movie</a>
+          </li>
 
         </ul>
       </li>
@@ -89,7 +104,6 @@
 
     <h2>Admin</h2>
     <div class="alert alert-primary" role="alert">
-      <strong>User List</strong>
       <div>
         <button type="button" class="btn btn-success" (click)="AddUserClick()"> Add new User</button>
       </div>
@@ -120,7 +134,11 @@
       </div>
       <div *ngIf="isActorListShow">
 
-<app-actor-list></app-actor-list>
+        <app-actor-list></app-actor-list>
+      </div>
+      <div *ngIf="isMovieListShow">
+
+        <app-movie-list></app-movie-list>
       </div>
     </div>
   </div>

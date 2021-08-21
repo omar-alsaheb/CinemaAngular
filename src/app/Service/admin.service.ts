@@ -6,6 +6,7 @@ import { AddUserModel } from '../Models/addUserModel';
 import { Category } from '../Models/CategoryModel';
 import { EditUserModel } from '../Models/EditUserModel';
 import { EditUserRoleModel } from '../Models/EditUserRoleModel';
+import { Movie } from '../Models/movieModel';
 import { RoleModel } from '../Models/RoleModel';
 import { SubCategory } from '../Models/SubCategoryModel';
 import { Users } from '../Models/users';
@@ -103,5 +104,16 @@ export class AdminService {
   }
   GetAllActors() :Observable<Actor[]>{
     return this.http.get<Actor[]>(this.baseUrl + '/GetActors', { withCredentials: true }).pipe();
+  }
+
+  GetActor(id: number):Observable<Actor>  {
+    return this.http.get<Actor>(this.baseUrl + '/GetAcor/' + id).pipe();
+  }
+  EditActor(formData: FormData) {
+    return this.http.put(this.baseUrl + '/EditActor', formData, { withCredentials: true }).pipe();
+  }
+
+  GetMovies() :Observable<Movie[]>{
+    return this.http.get<Movie[]>(this.baseUrl + '/GetMovies', { withCredentials: true }).pipe();
   }
 }

@@ -10,7 +10,7 @@
       <form [formGroup]="actorForms" (ngSubmit)="AddActor()">
         <div class="row">
           <div class="col-md-4 center">
-           <img class="img-fluid" [src]="url" alt="">
+           <img class="img-fluid rounded-circle w-50 img-thumbnail" [src]="url" alt="">
            <!-- <img src="../../../../assets/img/deff.png" alt=""> -->
           </div>
         </div>
@@ -21,7 +21,7 @@
         </div>
         <div class="form-group">
           <label for="AddNewCategory">Actor Name</label>
-          <input type="text" id="ActorName" class="form-control" placeholder="Actor Name" formControlName="actorName" />
+          <input type="text" id="ActorName" class="form-control " placeholder="Actor Name" formControlName="actorName" />
 
 
         </div>
